@@ -1,0 +1,151 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class cadı : MonoBehaviour
+{
+
+    public float velocity = 1f;
+    public Rigidbody2D rb2D;
+    public bool isdead;
+    public static int puan;
+    public static int highscore = 0;
+    public Text puantext;
+    public bool oyunbitti = false;
+    public GameObject öldünpanel;
+    public GameObject pause;
+    //[Header("bomba")]
+    //public GameObject bombaPrefab;
+    //GameObject bombaGameObject;
+    //Vector3 bombaInstantiatePosition;
+    //float instantiatezamanı = 0;
+    //public float x;
+    //[Header("yıldız")]
+    //public GameObject yıldızPrefab;
+    //GameObject yıldızGameObject;
+    //Vector3 yıldızInstantiatePosition;
+    //public float speed = 2.5f;
+    public AudioClip yıldız, bomba, basma, hayalet, ruh;
+
+
+
+
+
+    void Start()
+    {
+
+
+    }
+
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            GetComponent<AudioSource>().PlayOneShot(basma, 1f);
+            rb2D.linearVelocity = Vector2.down * velocity;
+
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            rb2D.linearVelocity = Vector2.up * velocity;
+        }
+        /* instantiatezamanı += Time.deltaTime;
+        if (instantiatezamanı > 7)
+        {
+            BombaInstantiate();
+            instantiatezamanı = 0;
+        } */
+        /*instantiatezamanı += Time.deltaTime;
+         if (instantiatezamanı > 7)
+         {
+             YıldızInstantiate();
+             instantiatezamanı = 0;
+         }*/
+
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.transform.tag == "düşman")
+        {
+            Destroy(collision.gameObject);
+            puan++;
+            puantext.text = "" + puan;
+        }
+        if (collision.gameObject.transform.tag == "anadüşman")
+        {
+
+            Destroy(this.gameObject);
+            oyunbitti = true;
+
+        }
+        if (collision.gameObject.transform.tag == "babadüşman")
+        {
+            GetComponent<AudioSource>().PlayOneShot(bomba, 1f);
+            Destroy(this.gameObject);
+            oyunbitti = true;
+
+        }
+        if (oyunbitti == true)
+        {
+            dead();
+
+            //SceneManager.LoadScene(0);
+        }
+        if (collision.gameObject.transform.tag == "dost")
+        {
+            GetComponent<AudioSource>().PlayOneShot(yıldız, 1f);
+            Destroy(collision.gameObject);
+            puan = puan + 5;
+            puantext.text = "" + puan;
+        }
+        if (collision.gameObject.transform.tag == "sinsi")
+        {
+            GetComponent<AudioSource>().PlayOneShot(hayalet, 1f);
+            Destroy(collision.gameObject);
+            velocity = velocity + (-1f);
+            puan = puan - 10;
+            puantext.text = "" + puan;
+        }
+        if (collision.gameObject.transform.tag == "şans")
+        {
+            GetComponent<AudioSource>().PlayOneShot(ruh, 1f);
+            Destroy(collision.gameObject);
+            velocity = velocity + (0.5f);
+            puan = puan + 10;
+            puantext.text = "" + puan;
+        }
+        if (highscore < puan)
+        {
+            PlayerPrefs.SetInt("High Score", puan);
+        }
+    }
+    public void dead()
+    {
+        öldünpanel.SetActive(true);
+        pause.SetActive(false);
+        Time.timeScale = 0f;
+
+    }
+
+    /* public void BombaInstantiate()
+     {
+         x = Random.Range(3f, -3f);
+         bombaInstantiatePosition = new Vector3(x, 6, 0);
+         bombaGameObject = Instantiate(bombaPrefab, bombaInstantiatePosition, Quaternion.identity);
+     }*/
+    /*public void YıldızInstantiate()
+    {
+        x = Random.Range(3f, -3f);
+        yıldızInstantiatePosition = new Vector3(x, 12, 0);
+        yıldızGameObject = Instantiate(yıldızPrefab, yıldızInstantiatePosition, Quaternion.identity);
+
+    }*/
+
+
+}
