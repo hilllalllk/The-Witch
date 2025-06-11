@@ -1,0 +1,81 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
+public class bullet : MonoBehaviour
+{
+    public int puan;
+    //public Text puantext;
+
+    Rigidbody2D rb;
+    public float bulletSpeed;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.right * bulletSpeed;
+        
+            Destroy(gameObject, 1);
+        
+
+    }
+
+
+    void Update()
+    {
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.transform.tag == "babadüşman")
+        {
+            Destroy(collision.gameObject);
+            puan++;	
+            //puantext.text = "" + puan;
+        }
+    }
+}
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
+public class bullet : MonoBehaviour
+{
+    public int puan;
+    //public Text puantext;
+
+    Rigidbody2D rb;
+    public float bulletSpeed;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = transform.right * bulletSpeed;
+        
+            Destroy(gameObject, 1);
+        
+
+    }
+
+
+    void Update()
+    {
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.transform.tag == "babadüşman")
+        {
+            Destroy(collision.gameObject);
+            puan++;	
+            //puantext.text = "" + puan;
+        }
+    }
+}
+
+ 

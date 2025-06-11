@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
+public class weapon : MonoBehaviour
+{
+    public Transform firePoint;
+    public GameObject bullet;
+    //public GameObject firebutton;
+
+
+    public float velocity = 1f;
+    public Rigidbody2D rb2D;
+
+    //public float velocity = 1f;
+    //public Rigidbody2D rb2D;
+    public Transform noskonum;
+    public GameObject nos;
+    public AudioClip �ut;
+
+    void Start()
+    {
+
+    }
+
+
+    public void Update()
+    {
+
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //   Shoot();
+        //}
+    }
+    public void Shoot()
+    {
+        Instantiate(bullet, firePoint.position, firePoint.rotation);
+        rb2D.linearVelocity = Vector2.right * velocity;
+        GetComponent<AudioSource>().PlayOneShot(�ut, 1f);
+
+
+    }
+    public void fireButton()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+
+            Shoot();
+        }
+    }
+    public void �s�n()
+    {
+        Instantiate(nos, noskonum.position, noskonum.rotation);
+        rb2D.linearVelocity = Vector2.right * velocity;
+
+    }
+    public void fireButton2()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            �s�n();
+        }
+    }
+
+
+}
+
