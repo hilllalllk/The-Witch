@@ -1,0 +1,232 @@
+using System.Collections; 
+
+using System.Collections.Generic; 
+
+using UnityEngine; 
+
+using UnityEngine.UI; 
+
+using UnityEngine.SceneManagement; 
+
+  
+
+public class spawner : MonoBehaviour 
+
+{ 
+
+    public cadı cadıscript; 
+
+    public GameObject borular; 
+
+    public float height; 
+
+    public GameObject bomb; 
+
+    public float yüksek; 
+
+    public GameObject yıldız; 
+
+    public float mesafe; 
+
+    public GameObject canavar; 
+
+    public float yükseklik; 
+
+    float instantiatezamanı = 0; 
+
+    public GameObject gölge; 
+
+    public float haş; 
+
+  
+
+    void Start() 
+
+    { 
+
+        StartCoroutine(spawnObject()); 
+
+        StartCoroutine(bombObject()); 
+
+        StartCoroutine(yıldızObject()); 
+
+        StartCoroutine(canavarObject()); 
+
+        StartCoroutine(gölgeObject()); 
+
+        
+
+    } 
+
+  
+
+  
+
+    void Update() 
+
+    { 
+
+       /* instantiatezamanı += Time.deltaTime; 
+
+        if (instantiatezamanı > 15) 
+
+        { 
+
+            canavarObject(); 
+
+            instantiatezamanı = 0; 
+
+        } 
+
+        instantiatezamanı += Time.deltaTime; 
+
+        if (instantiatezamanı > 15) 
+
+        { 
+
+            gölgeObject(); 
+
+            instantiatezamanı = 0; 
+
+        }*/ 
+
+  
+
+  
+
+  
+
+    } 
+
+    public IEnumerator spawnObject() 
+
+  
+
+    { 
+
+        while (!cadıscript.isdead) 
+
+        { 
+
+            Instantiate(borular, new Vector3(3, Random.Range(-height, height), 0), Quaternion.identity); 
+
+            yield return new WaitForSeconds(2.3f); 
+
+            
+
+        } 
+
+        
+
+  
+
+    } 
+
+    public IEnumerator bombObject() 
+
+    { 
+
+        while (!cadıscript.isdead) 
+
+        { 
+
+  
+
+            Instantiate(bomb, new Vector3(6, Random.Range(-yüksek, yüksek), 0), Quaternion.identity); 
+
+            yield return new WaitForSeconds(4f); 
+
+  
+
+  
+
+        } 
+
+    } 
+
+    public IEnumerator yıldızObject() 
+
+    { 
+
+        while (!cadıscript.isdead) 
+
+        { 
+
+  
+
+            Instantiate(yıldız, new Vector3(6, Random.Range(-mesafe, mesafe), 0), Quaternion.identity); 
+
+            yield return new WaitForSeconds(30f); 
+
+  
+
+  
+
+        } 
+
+    } 
+
+    public IEnumerator canavarObject() 
+
+    { 
+
+        while (!cadıscript.isdead) 
+
+        { 
+
+  
+
+            Instantiate(canavar, new Vector3(64, Random.Range(-yükseklik, yükseklik), 0), Quaternion.identity); 
+
+            yield return new WaitForSeconds(40f); 
+
+  
+
+  
+
+        } 
+
+    } 
+
+    public IEnumerator gölgeObject() 
+
+    { 
+
+        while (!cadıscript.isdead) 
+
+        { 
+
+  
+
+            Instantiate(gölge, new Vector3(72, Random.Range(-haş, haş), 0), Quaternion.identity); 
+
+            yield return new WaitForSeconds(40f); 
+
+  
+
+  
+
+        } 
+
+    } 
+
+  
+
+} 
+
+using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.UI; using UnityEngine.SceneManagement; 
+
+public class move : MonoBehaviour { public float speed; 
+
+private void Start() 
+{ 
+    Destroy(gameObject, 7); 
+} 
+ 
+ 
+void FixedUpdate() 
+{ 
+    transform.position += Vector3.left * speed * Time.deltaTime; 
+  
+
+    } } 
